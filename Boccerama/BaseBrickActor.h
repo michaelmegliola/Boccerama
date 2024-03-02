@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "NiagaraFunctionLibrary.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 #include "BaseBrickActor.generated.h"
 
 UCLASS()
@@ -25,4 +26,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="FX")
 	UNiagaraComponent* FxComponent;
+
+	//UPROPERTY(EditAnywhere, Category = "Components")
+	//URadialForceComponent* RadialForceComponent;
 };

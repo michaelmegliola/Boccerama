@@ -30,6 +30,7 @@ private:
 	FTimerHandle TimerHandle_Build;
 	void BuildWall();
 	int ChildCount;
+	bool Stopped;
 
 public:	
 	// Called every frame

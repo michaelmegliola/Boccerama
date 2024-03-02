@@ -2,6 +2,7 @@
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraSystem.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 
 ABaseBrickActor::ABaseBrickActor()
 {
@@ -19,7 +20,8 @@ ABaseBrickActor::ABaseBrickActor()
 			SM_Component->SetWorldScale3D(FVector(2.0,1.0,1.0));
 			
 			// create a static loader for material -- do not load more than once (?)
-			if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Script/Engine.Material'/Game/StarterContent/Materials/M_Metal_Rust.M_Metal_Rust'")))
+			
+			if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Script/Engine.Material'/Game/StarterContent/Materials/BrickRed.BrickRed'")))
 			{
 				SM_Component->SetMaterial(0, Material);
 			}
@@ -40,6 +42,12 @@ ABaseBrickActor::ABaseBrickActor()
 	}
 	FSoftObjectPath AssetRef(TEXT("/Script/Niagara.NiagaraSystem'/Game/Levels/SpawnNiagraSystem.SpawnNiagraSystem'"));
 	FxSpawn = Cast<UNiagaraSystem>(StaticLoadObject(UNiagaraSystem::StaticClass(), nullptr, *AssetRef.ToString()));
+
+	/*
+	RadialForceComponent = CreateDefaultSubobject<URadialForceComponent>(TEXT("RadialForceComponent"));
+	RadialForceComponent->Radius = 5000.f;
+	RadialForceComponent->ImpulseStrength = 20000.f;
+	*/
 }
 
 void ABaseBrickActor::RequestDestroy()
@@ -53,6 +61,7 @@ void ABaseBrickActor::RequestDestroy()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Could not acquire pointer to Niagra component"));
 	}
+	//RadialForceComponent->FireImpulse();
 	Destroy();
 }
 

@@ -51,6 +51,15 @@ void ABoccePawn::BeginPlay()
 			MyUiInstance->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (PlayerController)
+	{
+		// Make the cursor visible
+		PlayerController->bShowMouseCursor = true;
+
+		// Enable the mouse to move freely
+		PlayerController->SetInputMode(FInputModeUIOnly());
+	}
 }
 
 void ABoccePawn::ToggleUiNow()
